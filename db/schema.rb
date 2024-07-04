@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_055651) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_01_183621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "event_attendees", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "events_id", null: false
-    t.bigint "users_id", null: false
-    t.index ["events_id"], name: "index_event_attendees_on_events_id"
-    t.index ["users_id"], name: "index_event_attendees_on_users_id"
+    t.index ["event_id"], name: "index_event_attendees_on_event_id"
+    t.index ["user_id"], name: "index_event_attendees_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -28,6 +28,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_055651) do
     t.datetime "updated_at", null: false
     t.string "title"
     t.text "description"
+    t.date "start_date"
+    t.time "start_time"
+    t.string "location"
+    t.bigint "creator_id"
+    t.index ["creator_id"], name: "index_events_on_creator_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -43,6 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_055651) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "event_attendees", "events", column: "events_id"
-  add_foreign_key "event_attendees", "users", column: "users_id"
+  add_foreign_key "event_attendees", "events"
+  add_foreign_key "event_attendees", "users"
+  add_foreign_key "events", "users", column: "creator_id"
 end
