@@ -15,12 +15,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_183621) do
   enable_extension "plpgsql"
 
   create_table "event_attendees", force: :cascade do |t|
-    t.bigint "event_id", null: false
-    t.bigint "user_id", null: false
+    t.bigint "attendee_id"
+    t.bigint "attended_events_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_event_attendees_on_event_id"
-    t.index ["user_id"], name: "index_event_attendees_on_user_id"
+    t.index ["attended_events_id"], name: "index_event_attendees_on_attended_events_id"
+    t.index ["attendee_id"], name: "index_event_attendees_on_attendee_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_01_183621) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "event_attendees", "events"
-  add_foreign_key "event_attendees", "users"
+  add_foreign_key "event_attendees", "events", column: "attended_events_id"
+  add_foreign_key "event_attendees", "users", column: "attendee_id"
   add_foreign_key "events", "users", column: "creator_id"
 end
