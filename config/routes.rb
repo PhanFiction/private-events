@@ -11,9 +11,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :events
-    member do 
-      get :all_events
-    end
+    get '/all_events', to: 'users#all_events', as: 'all_events'
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
