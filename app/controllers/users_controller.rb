@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:all_events]
 
   def show
     # @user is set by the before_action
@@ -14,10 +15,19 @@ class UsersController < ApplicationController
     end
   end
 
-  private
+  def all_events
+    @user = User.find(params[:user_id])
+    @events = @user.all_events
+  end
 
-  def set_user 
-    @user = User.find(params[:id])
+  private
+  
+  def ensure_correct_user
+    @user = User.find(params[:user_id])
+    unless @user == current_user
+      flash[:alert] = "You don't have permission to view this user's events"
+      redirect_to root_path
+    end
   end
 
   def user_params
