@@ -12,7 +12,11 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <% if !devise_controller? || (devise_controller? && action_name != "new" && action_name != "create") %>
+      <%= render "layouts/nav" %>
+    <% end %>
+<%#     <main class="container mx-auto mt-28 px-5 flex h-screen"> %>
+    <main class="container mx-auto mt-28 px-5">
       <%= yield %>
     </main>
   </body>

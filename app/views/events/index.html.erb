@@ -1,0 +1,39 @@
+<div class="flex flex-col gap-4 mb-4">
+  <section class="bg-white-05 p-2 md:p-8">
+    <h1 class="text-2xl font-semibold mb-4 text-center md:text-left">Upcoming Events</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center sm:justify-start">
+      <% @upcoming_events.each do |event| %>
+        <%= link_to event_path(event) do %>
+          <article class="bg-gradient-white border rounded">
+            <h4 class="font-semibold text-center border-b p-4"><%= event.title %></h4>
+            <p class="p-4"><%= event.description %></p><br>
+            <div class="flex justify-evenly border-t text-center">
+              <time class="p-2"><%= event.start_time.strftime("%I:%M %p") %></time>
+              <span class="border"></span>
+              <address class="p-2"><%= event.location %></address>
+            </div>
+          </article>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="bg-white-05 p-8">
+    <h1 class="text-2xl font-semibold mb-4">Past Events</h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center sm:justify-start">
+        <% @past_events.each do |event| %>
+          <%= link_to event_path(event) do %>
+            <article class="bg-gradient-white border rounded">
+              <h4 class="font-semibold text-center border-b p-4"><%= event.title %></h4>
+              <p class="p-4"><%= event.description %></p><br>
+              <div class="flex justify-evenly border-t text-center">
+                <time class="p-2"><%= event.start_time.strftime("%I:%M %p") %></time>
+                <span class="border"></span>
+                <address class="p-2"><%= event.location %></address>
+              </div>
+            </article>
+          <% end %>
+      <% end %>
+    </div>
+  </section>
+</div>

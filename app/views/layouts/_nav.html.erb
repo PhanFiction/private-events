@@ -1,0 +1,22 @@
+<nav class="w-full text-white bg-bluePurple p-6 fixed top-0 left-0">
+  <ul class="flex gap-4 items-center w-full">
+
+    <%= link_to root_path do %>
+      <li class="flex items-center gap-4">
+        <%= image_tag asset_path("icon.png"), class: "rounded-full w-12 h-12" %>
+        <h3 class="font-bold">Animetoon</h3>
+      </li>
+    <% end %>
+
+    <ul class="ml-auto">
+      <% if user_signed_in? %>
+        <%= render 'layouts/navcontent'%>
+        <% else %>
+        <li>
+          <%= link_to "Login", new_user_session_path %> |
+          <%= link_to "Sign Up", new_user_registration_path %>
+        </li>
+      <% end %>
+    </ul>
+  </ul>
+</nav>

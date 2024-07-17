@@ -1,0 +1,41 @@
+<label class="popup cursor-pointer">
+  <input type="checkbox">
+  <div class="burger" tabindex="0">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav class="popup-window">
+    <ul>
+      <li class="text-center">
+        <%= link_to edit_user_registration_path do %>
+          <span><%= current_user.username %></span>
+        <% end %>
+      </li>
+      <hr>
+      <li>
+        <%= link_to user_all_events_path(current_user) do %>
+          <button>
+            <i class="material-icons outlined w-6 h-6">events</i>
+            <span>Attended Events</span>
+          </button>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_user_event_path(user_id: current_user.id) do %>
+          <button>
+            <i class="material-icons outlined w-6 h-6">events</i>
+            <span>Create Event</span>
+          </button>
+        <% end %>
+      </li>
+      <hr>
+      <li>
+        <%= button_to destroy_user_session_path, method: :delete do %>
+          <i class="material-icons outlined p-0">logout</i>
+          <span>Logout</span>
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</label>

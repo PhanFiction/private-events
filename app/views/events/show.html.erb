@@ -1,0 +1,36 @@
+<article class="flex flex-col gap-4 md:w-1/2 mx-auto border p-4 rounded-md">
+  <h1 class="font-semibold text-lg md:text-2xl text-center"> <%= @event.title %></h1>
+  <% if @event.creator_id == current_user.id %>
+    <%= link_to edit_user_event_path(current_user, @event), class: "absolute" do %>
+      <button>
+        <i class="material-icons outlined w-6 h-6">edit</i>
+      </button>
+    <% end %>
+  <% end %>
+  <div class="flex gap-4 justify-evenly flex-col text-center md:flex-row md:text-left items-center">
+    <p>Hosted by <br><span class="font-semibold"><%= @event.creator.username %></span></p>
+    <ul class="flex gap-4 items-center *:border *:rounded-md *:p-2">
+      <%= render partial: "layouts/event_attendees", locals: { event: @event } %>
+    </ul>
+  </div>
+
+  <p class="text-pretty my-4"><%= @event.description %></p>
+
+  <ul class="flex items-center justify-evenly *:border *:rounded-md *:p-2 gap-4 *:text-sm md:*:text-md">
+    <li>
+      <address><%= @event.location %></address>
+    </li>
+    <li>
+      <time><%= @event.start_time.strftime("%I:%M %p") %></time>
+    </li>
+  </ul>
+  
+  <div class="mx-auto">
+    <% if @attending %>
+      <%= button_to "Leave this event", event_event_attendee_path(@event), method: :put, class: "bg-white-05 hover:bg-dark p-2 rounded-md mx-auto my-4" %>
+    <% else %>
+      <%= button_to "Join this event", event_event_attendee_path(@event), method: :put, class: "bg-white-05 hover:bg-dark p-2 rounded-md mx-auto my-4" %>
+    <% end %>
+  </div>
+
+</article>

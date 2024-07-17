@@ -1,0 +1,15 @@
+<% if objects.errors.any? %>
+  <div class="bg-red text-white p-4 rounded-md" id="error-message">
+    <h3>Unable to save due to the followings:</h3>
+    <ol class="list-decimal p-4">
+      <% objects.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ol>
+  </div>
+  <script>
+    setTimeout(() => {
+      document.getElementById("error-message").remove();
+    }, 5000);
+  </script>
+<% end %>

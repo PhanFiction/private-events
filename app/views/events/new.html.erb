@@ -1,0 +1,20 @@
+<section class="flex flex-col p-4 mx-auto">
+  <h2 class="text-center font-bold">Create Event</h2>
+
+  <%# user/6/event/new %>
+  <%= form_with model: [:user, @event], class: "flex flex-col gap-4 p-8 shadow-lg rounded-md bg-white-05 mx-auto" do |form| %>
+
+    <%= render partial: 'layouts/form_field', locals: { f: form, name: :title, field_type: :text, label: 'Title', value: 'Random anime event', placeholder: 'Title' } %>
+
+    <%= render partial: 'layouts/form_field', locals: { f: form, name: :description, field_type: :text, label: 'Description', value: 'A anime event in Tokyo', placeholder: 'Description' } %>
+
+    <%= render partial: 'layouts/form_field', locals: { f: form, name: :location, field_type: :text, label: 'Location', value: 'Gaming anime cafe', placeholder: 'Location' } %>
+
+    <%= render partial: 'layouts/form_field', locals: { f: form, name: :start_date, field_type: :date, label: 'Date', value: '', placeholder: '' } %>
+
+    <%= render partial: 'layouts/form_field', locals: { f: form, name: :start_time, field_type: :time, label: 'Time', value: '', placeholder: '' } %>
+
+    <%= form.submit "Create Event", class: "bg-white-05 hover:bg-dark  text-white cursor-pointer font-bold p-2 rounded-md mt-4 block" %>
+
+  <% end %>
+</section>

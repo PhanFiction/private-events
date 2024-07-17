@@ -1,0 +1,19 @@
+<div class="flex flex-col">
+  <%= f.label "#{name}:", "#{label}:" %>
+
+  <% if field_type == :date %>
+    <%= f.date_field "#{name}", value: "#{value}", placeholder: "#{placeholder}", class: "form-control w-full text-black #{'is-invalid' if f.object.errors["#{name}"].present?}" %>
+
+  <% elsif field_type == :time %>
+    <%= f.time_field "#{name}", value: "#{value}", placeholder: "#{placeholder}", class: "form-control w-full text-black #{'is-invalid' if f.object.errors["#{name}"].present?}" %>
+  <% else %>
+
+    <%= f.text_field "#{name}", value: "#{value}", placeholder: "#{placeholder}", class: "form-control w-full text-black #{'is-invalid' if f.object.errors["#{name}"].present?}" %>
+  <% end %>
+
+  <% if f.object.errors["#{name}"].present? %>
+    <div class="text-red text-sm">
+      <%= f.object.errors["#{name}"].first %>
+    </div>
+  <% end %>
+</div>
