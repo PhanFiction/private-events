@@ -1,5 +1,10 @@
 # README
 
+## Account
+* if you do not want to make an account feel free to use the followings
+1. email: homersimpsons@gmail.com, password: 123456
+2. email: meliodas@gmail.com, password: 123456
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
