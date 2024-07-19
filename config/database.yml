@@ -82,6 +82,4 @@ test:
 #
 production:
   <<: *default
-  database: animetoon_production
-  username: animetoon
-  password: <%= ENV["ANIMETOON_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
